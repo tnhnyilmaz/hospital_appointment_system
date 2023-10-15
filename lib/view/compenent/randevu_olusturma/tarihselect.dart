@@ -117,13 +117,37 @@ class _DateSelectState extends State<DateSelect> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text("Randevu Onay"),
-                          content: Column(children: [
-                            Text(
-                                "${_currentDay.day} ${selectMonth} ${_currentDay.year}"),
-                            if (_timeSelected)
-                              Text(
-                                  "Seçilen Saat: ${(9 + _currentIndex!).toString().padLeft(2, '0')}:00"),
-                          ]),
+                          content: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      "${_currentDay.day} ${selectMonth} ${_currentDay.year}"),
+                                  if (_timeSelected)
+                                    Text(
+                                        "Seçilen Saat: ${(9 + _currentIndex!).toString().padLeft(2, '0')}:00"),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, "/hastaneRandevu");
+                                    },
+                                    child: Text(
+                                      "ONAYLA",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ProjectColors.green,
+                                    ),
+                                  )
+                                ]),
+                          ),
                         );
                       });
                 },

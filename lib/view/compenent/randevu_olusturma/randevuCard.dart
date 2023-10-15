@@ -10,9 +10,14 @@ class RandevuCard extends StatelessWidget {
   String textKullanici;
   String textPoliklinik;
   String textPoliklinikYer;
+  String textTarih;
+  String textSaat;
+
   RandevuCard(
       {super.key,
       required this.containerColor,
+      required this.textTarih,
+      required this.textSaat,
       required this.textPoliklinik,
       required this.textPoliklinikYer,
       required this.textKullanici,
@@ -44,27 +49,27 @@ class RandevuCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 15, color: Colors.black),
               ),
               Row(children: [
-                Icon(Icons.person_2_outlined),
+                const Icon(Icons.person_2_outlined),
                 Text(
                   textKullanici,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: const TextStyle(fontSize: 15, color: Colors.black),
                 ),
               ]),
               Row(
                 children: [
-                  Icon(Icons.medical_services_outlined),
+                  const Icon(Icons.medical_services_outlined),
                   Text(
                     textPoliklinik,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: const TextStyle(fontSize: 15, color: Colors.black),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Icon(Icons.medication_sharp),
+                  const Icon(Icons.medication_sharp),
                   Text(
                     textPoliklinikYer,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: const TextStyle(fontSize: 15, color: Colors.black),
                   ),
                 ],
               ),
@@ -74,7 +79,7 @@ class RandevuCard extends StatelessWidget {
                     fontSize: 15,
                     color: randevuTur == "Muayene"
                         ? ProjectColors.yellow
-                        : Color.fromARGB(255, 0, 94, 255)),
+                        : const Color.fromARGB(255, 0, 94, 255)),
               ),
               Text(
                 "*${randevuDurumu} ",
@@ -96,46 +101,40 @@ class RandevuCard extends StatelessWidget {
       height: height * 0.1,
       decoration: BoxDecoration(
           color: containerColor, borderRadius: BorderRadius.circular(10)),
-      child: const Padding(
-        padding: EdgeInsets.all(5.0),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
         child: Row(
           children: [
             Expanded(
+                flex: 3,
                 child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("25",
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white)),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Ağustos 2022",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ],
-            )),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      textTarih,
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
+                )),
             Expanded(
+                flex: 2,
                 child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(
-                  Icons.access_time,
-                  color: Colors.white,
-                  size: 40,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "13:50",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                )
-              ],
-            ))
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Icon(
+                      Icons.access_time,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      textSaat,
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    )
+                  ],
+                ))
           ],
         ),
       ),

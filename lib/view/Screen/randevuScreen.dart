@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/constant/colors.dart';
 import 'package:flutter_application_2/view/compenent/bottomAppBar.dart';
 import 'package:flutter_application_2/view/compenent/randevu_olusturma/randevuCard.dart';
+import 'package:intl/intl.dart';
 
 import '../../Services/RandevuService.dart';
 import '../../model/randevuModel/RandevuModel.dart';
@@ -109,9 +110,9 @@ class _RandevuScreenState extends State<RandevuScreen>
           print("randevular ${randevular}");
 
           final randevularim =
-              randevular.where((randevu) => randevu.randevuState).toList();
+              randevular.where((randevu) => randevu.randevuState!).toList();
           final gecmisRandevularim =
-              randevular.where((randevu) => !randevu.randevuState).toList();
+              randevular.where((randevu) => !randevu.randevuState!).toList();
 
           final List<RandevuModel> goruntulenecekRandevular =
               _tabController.index == 0 ? randevularim : gecmisRandevularim;
@@ -122,12 +123,14 @@ class _RandevuScreenState extends State<RandevuScreen>
               final randevu = goruntulenecekRandevular[index];
               return RandevuCard(
                 containerColor:
-                    randevu.randevuState ? Colors.green : Colors.red,
-                textPoliklinik: randevu.randevuPoliklinik,
-                textPoliklinikYer: randevu.randevuPoliklinikYer,
-                textKullanici: randevu.randevuKullanici,
-                textHastane: randevu.randevuHastane,
-                randevuTur: randevu.randevuTur,
+                    randevu.randevuState! ? Colors.green : Colors.red,
+                textPoliklinik: randevu.randevuPoliklinik!,
+                textPoliklinikYer: randevu.randevuPoliklinikYer!,
+                textKullanici: randevu.randevuKullanici!,
+                textHastane: randevu.randevuHastane!,
+                randevuTur: randevu.randevuTur!,
+                textSaat: randevu.randevuTime.toString(),
+                textTarih: randevu.randevuDate.toString(),
                 randevuDurumu:
                     _tabController.index == 0 ? "Randevularım" : "Geçmiş",
               );
@@ -136,5 +139,17 @@ class _RandevuScreenState extends State<RandevuScreen>
         }
       },
     );
+  }
+
+  String formatTarih(DateTime tarih) {
+    final dateFormat = DateFormat('dd MMMM y');
+    print("date format : ${dateFormat}"); // "10 Haziran 2023" formatı
+    return dateFormat.format(tarih);
+  }
+
+  String formatSaat(TimeOfDay saat) {
+    final temp = saat.toString(); // 24 saatlik saat biçimi
+    final subs = temp.substring(0, 5);
+    return subs;
   }
 }

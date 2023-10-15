@@ -16,6 +16,7 @@ class _DropHastaneState extends State<DropHastane> {
   late HastaneService hastaneService;
   List<String?> list = [];
   String? selectedValue;
+  String? selectedHastane;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -29,6 +30,7 @@ class _DropHastaneState extends State<DropHastane> {
     String getCity = CityToPlaka().findPlakaNo(selectedCity);
     hastaneService.GetSelectedCityHastane(getCity).then((hastaneler) {
       setState(() {
+        selectedHastane = null;
         list = hastaneler.map((e) => e.hastaneAdi).toList();
       });
     });
@@ -38,19 +40,19 @@ class _DropHastaneState extends State<DropHastane> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: selectedValue,
+      value: selectedHastane,
       onChanged: (String? newValue) {
         setState(() {
           if (list.contains(newValue)) {
-            selectedValue = newValue;
-            print(selectedValue);
+            selectedHastane = newValue;
+            print("selectedHastane: ${selectedHastane}");
           } else {
-            // Seçilen değer `list` içinde yoksa burada işlem yapabilirsiniz.
-            // Örneğin, selectedValue'yu temizleyebilirsiniz.
+            // Seçilen değer `list` içinde yoksa, selectedValue'yu temizle
             selectedValue = null;
           }
         });
       },
+
       items: list.map<DropdownMenuItem<String>>((String? value) {
         String displayedText = value ?? "";
         if (displayedText.length > 35) {

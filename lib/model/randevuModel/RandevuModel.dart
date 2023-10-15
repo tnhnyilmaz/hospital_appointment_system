@@ -1,31 +1,48 @@
 class RandevuModel {
-  final int randevuID;
-  final String randevuTur;
-  final bool randevuState;
-  final String randevuPoliklinik;
-  final String randevuPoliklinikYer;
-  final String randevuKullanici;
-  final String randevuHastane;
+  int? randevuID;
+  String? randevuTur;
+  bool? randevuState;
+  String? randevuPoliklinik;
+  String? randevuPoliklinikYer;
+  String? randevuKullanici;
+  String? randevuHastane;
+  String? randevuDate;
+  String? randevuTime;
 
-  RandevuModel({
-    required this.randevuID,
-    required this.randevuTur,
-    required this.randevuState,
-    required this.randevuPoliklinik,
-    required this.randevuPoliklinikYer,
-    required this.randevuKullanici,
-    required this.randevuHastane,
-  });
+  RandevuModel(
+      {this.randevuID,
+      this.randevuTur,
+      this.randevuState,
+      this.randevuPoliklinik,
+      this.randevuPoliklinikYer,
+      this.randevuKullanici,
+      this.randevuHastane,
+      this.randevuDate,
+      this.randevuTime});
 
-  factory RandevuModel.fromJson(Map<String, dynamic> json) {
-    return RandevuModel(
-      randevuID: json['randevuID'],
-      randevuTur: json['randevuTur'],
-      randevuState: json['randevuState'],
-      randevuPoliklinik: json['randevuPoliklinik'],
-      randevuPoliklinikYer: json['randevuPoliklinikYer'],
-      randevuKullanici: json['randevuKullanici'],
-      randevuHastane: json['randevuHastane'],
-    );
+  RandevuModel.fromJson(Map<String, dynamic> json) {
+    randevuID = json['randevuID'];
+    randevuTur = json['randevuTur'];
+    randevuState = json['randevuState'];
+    randevuPoliklinik = json['randevuPoliklinik'];
+    randevuPoliklinikYer = json['randevuPoliklinikYer'];
+    randevuKullanici = json['randevuKullanici'];
+    randevuHastane = json['randevuHastane'];
+    randevuDate = json['randevuDate'];
+    randevuTime = json['randevuTime'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['randevuID'] = this.randevuID;
+    data['randevuTur'] = this.randevuTur;
+    data['randevuState'] = this.randevuState;
+    data['randevuPoliklinik'] = this.randevuPoliklinik;
+    data['randevuPoliklinikYer'] = this.randevuPoliklinikYer;
+    data['randevuKullanici'] = this.randevuKullanici;
+    data['randevuHastane'] = this.randevuHastane;
+    data['randevuDate'] = this.randevuDate;
+    data['randevuTime'] = this.randevuTime;
+    return data;
   }
 }

@@ -14,7 +14,7 @@ class DropCity extends StatefulWidget {
 class _DropCityState extends State<DropCity> {
   late PlakaNoService plakaNoService;
   List<String?> list = [];
-  String? selectedValue;
+  String? selectedCity;
 
   @override
   void initState() {
@@ -31,13 +31,13 @@ class _DropCityState extends State<DropCity> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: selectedValue,
+      value: selectedCity,
       onChanged: (String? newValue) {
         Provider.of<CityProvider>(context, listen: false)
             .setSelectedCity(newValue);
         setState(() {
-          selectedValue = newValue;
-          print(selectedValue);
+          selectedCity = newValue;
+          print("selectedCity: ${selectedCity}");
         });
       },
       items: list.map<DropdownMenuItem<String>>((String? value) {
