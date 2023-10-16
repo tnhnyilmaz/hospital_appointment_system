@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Provider/RandevuAlmaProvider.dart';
 import 'package:flutter_application_2/Services/Poliklinikservice.dart';
+import 'package:provider/provider.dart';
 
 class DropPoliklinik extends StatefulWidget {
   const DropPoliklinik({super.key});
@@ -11,7 +13,7 @@ class DropPoliklinik extends StatefulWidget {
 class _DropPoliklinikState extends State<DropPoliklinik> {
   late PoliklinikService poliklinikservice;
   List<String?> list = [];
-  String? selectedValue;
+  String? selectedPoliklinik;
 
   @override
   void initState() {
@@ -28,11 +30,13 @@ class _DropPoliklinikState extends State<DropPoliklinik> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: selectedValue,
+      value: selectedPoliklinik,
       onChanged: (String? newValue) {
+        Provider.of<RandevuAlmaProvider>(context, listen: false)
+            .setSelectedPoliklinik(newValue);
         setState(() {
-          selectedValue = newValue;
-          print(selectedValue);
+          selectedPoliklinik = newValue;
+          print("selectedCity: ${selectedPoliklinik}");
         });
       },
       items: list.map<DropdownMenuItem<String>>((String? value) {

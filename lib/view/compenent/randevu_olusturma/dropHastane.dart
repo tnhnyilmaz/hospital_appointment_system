@@ -3,7 +3,7 @@ import 'package:flutter_application_2/Services/HastaneService.dart';
 import 'package:flutter_application_2/city%20to%20plakaNo/citytoplaka.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Provider/CityProvider.dart';
+import '../../../Provider/RandevuAlmaProvider.dart';
 
 class DropHastane extends StatefulWidget {
   const DropHastane({super.key});
@@ -25,8 +25,9 @@ class _DropHastaneState extends State<DropHastane> {
     // initState() {
     // super.initState();
     hastaneService = HastaneService();
-    String selectedCity = Provider.of<CityProvider>(context).selectedCity ?? '';
-    print("seçilen city :${selectedCity}");
+    String selectedCity =
+        Provider.of<RandevuAlmaProvider>(context).selectedCity ?? '';
+    print("seçilen city hastane dropdown :${selectedCity}");
     String getCity = CityToPlaka().findPlakaNo(selectedCity);
     hastaneService.GetSelectedCityHastane(getCity).then((hastaneler) {
       setState(() {
@@ -42,6 +43,8 @@ class _DropHastaneState extends State<DropHastane> {
     return DropdownButton<String>(
       value: selectedHastane,
       onChanged: (String? newValue) {
+        Provider.of<RandevuAlmaProvider>(context, listen: false)
+            .setSelectedHospital(newValue);
         setState(() {
           if (list.contains(newValue)) {
             selectedHastane = newValue;

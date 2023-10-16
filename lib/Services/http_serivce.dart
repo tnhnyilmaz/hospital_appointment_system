@@ -18,6 +18,7 @@ class HttpService implements ApiService {
       print("respınsebody : ${response.body}");
       return response;
     } catch (e) {
+      print(e);
       throw e;
     }
   }

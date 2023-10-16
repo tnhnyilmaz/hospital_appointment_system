@@ -10,13 +10,13 @@ import 'package:flutter_application_2/view/Screen/view/hastaneRandevuscreen.dart
 import 'package:flutter_application_2/view/compenent/randevu_olusturma/tarihselect.dart';
 import 'package:provider/provider.dart';
 
-import 'Provider/CityProvider.dart';
+import 'Provider/RandevuAlmaProvider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CityProvider()),
+        ChangeNotifierProvider(create: (_) => RandevuAlmaProvider()),
         // Diğer sağlayıcıları burada ekleyebilirsiniz
       ],
       child: MyApp(),

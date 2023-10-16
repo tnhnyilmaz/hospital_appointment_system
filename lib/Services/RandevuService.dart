@@ -21,6 +21,7 @@ class RandevuService {
       randevular = randevuList;
       return randevular;
     } else {
+      print(e);
       throw e;
     }
   }

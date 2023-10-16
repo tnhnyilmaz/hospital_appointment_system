@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Services/plakaNo.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Provider/CityProvider.dart';
+import '../../../Provider/RandevuAlmaProvider.dart';
 
 class DropCity extends StatefulWidget {
   DropCity({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _DropCityState extends State<DropCity> {
     return DropdownButton<String>(
       value: selectedCity,
       onChanged: (String? newValue) {
-        Provider.of<CityProvider>(context, listen: false)
+        Provider.of<RandevuAlmaProvider>(context, listen: false)
             .setSelectedCity(newValue);
         setState(() {
           selectedCity = newValue;
