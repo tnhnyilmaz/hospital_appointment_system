@@ -8,6 +8,7 @@ import 'package:flutter_application_2/view/compenent/randevu_olusturma/dropHasta
 import 'package:flutter_application_2/view/compenent/randevu_olusturma/dropPoliklinik.dart';
 import 'package:flutter_application_2/view/compenent/randevu_olusturma/tarihselect.dart';
 import 'package:flutter_application_2/view/compenent/randevu_olusturma/timepicker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../constant/colors.dart';
 import '../../compenent/bottomAppBar.dart';
@@ -20,6 +21,14 @@ class HastaneRandevuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final dateProvider = Provider.of<RandevuAlmaProvider>(context);
+
+    DateTime selectedDate = dateProvider.selectedDate;
+    int? selectedTimeIndex = dateProvider.selectedTimeIndex;
+
+    // ignore: unnecessary_null_comparison
+    bool tarihSecildiMi = selectedDate != null;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -45,7 +54,11 @@ class HastaneRandevuScreen extends StatelessWidget {
                                 Navigator.pushNamed(context, 'DateSelect');
                               },
                               child: Text(
-                                "Tarih Seçiniz                                                                          ",
+                                tarihSecildiMi
+                                    ? DateFormat(
+                                            'dd MMMM yyyy                                                            ')
+                                        .format(selectedDate)
+                                    : "Tarih Seçiniz",
                                 style: TextStyle(
                                     color: ProjectColors.black.withOpacity(0.6),
                                     fontSize: 15),
@@ -158,11 +171,6 @@ class HastaneRandevuScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pop(context);
                             randevuProvider.clearData();
-                            print("SON İŞLEMLERREASDA ");
-                            print(city);
-                            print(hospital);
-                            print(poliklinik);
-                            print(doctor);
                             Future.delayed(Duration.zero, () {
                               Navigator.pushNamed(context, '/hastaneRandevu');
                             });

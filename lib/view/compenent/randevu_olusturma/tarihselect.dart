@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_2/Provider/RandevuAlmaProvider.dart';
 import 'package:flutter_application_2/constant/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DateSelect extends StatefulWidget {
@@ -23,6 +25,7 @@ class _DateSelectState extends State<DateSelect> {
 
   @override
   Widget build(BuildContext context) {
+    final dateProvider = Provider.of<RandevuAlmaProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -134,6 +137,8 @@ class _DateSelectState extends State<DateSelect> {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
+                                      dateProvider.setDate(_currentDay);
+                                      dateProvider.setTimeIndex(_currentIndex);
                                       Navigator.pushNamed(
                                           context, "/hastaneRandevu");
                                     },

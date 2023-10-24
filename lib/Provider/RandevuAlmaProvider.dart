@@ -37,6 +37,19 @@ class RandevuAlmaProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime selectedDate = DateTime.now();
+  int? selectedTimeIndex;
+
+  void setDate(DateTime date) {
+    selectedDate = date;
+    notifyListeners();
+  }
+
+  void setTimeIndex(int? index) {
+    selectedTimeIndex = index;
+    notifyListeners();
+  }
+
   void clearData() {
     _selectedCity = null;
     _selectedPoliklinik = null;
